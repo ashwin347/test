@@ -1,0 +1,120 @@
+So here's the notebook
+with the basic data for a single song and
+traditional Irish music. Later we're going to do
+a corpus with lots of songs. But let's take a look
+at what happens with just a single song just
+to keep it very simple. First of all, I'm
+just gonna input everything that I need, and now I'm going to tokenize
+the data from the song. We can see the data is
+just this one long string with all of the lyrics. I split the lines
+with just the /n. So when I'm creating the corpus, i am just taking that and
+splitting it by a /n. Tokenizer fit on text
+corpus will then fit a tokenizer to all
+the text that's in here, and we can see the actual
+word index replied all etc. This number 263 is the total number of unique
+words that are in this corpus. So it's not a lot
+of words of course, as we start doing
+predictions based off this we're going to have
+a very limited dataset. So we'll see a lot of gibberish but the structure will
+actually work quite well. So now, I am going to
+create my input sequences. So my training data, that I'm going to use in the entraining the
+neural network itself. So what I want to do is
+that for each sentence, in the song or in the corpus, I'm going to take
+a look at each of the phrases within that and then the word that
+actually follows. So for example, if you look
+at the first sentence here in the song that's in the town
+of Athy one Jeremy Lanigan. When I go down here to look at the tokenizers word index for those in the town of
+a Athy one Jeremy Lanigan, we see that those are four, two, 66, eight etc. The important one
+to look at here is Lanigan which is number 70. So now if I start looking
+at my Xs that I've created. So my training data from
+my Xs that I've created. Here is one sentence
+that's in there. It's 4, 2, 66, 8, 67, 68, 69 which is in the town
+of a Athy one Jeremy. So in this case we say when our training data
+looks like this, we want to label it with
+the next word in the sequence. The next word in
+the sequence is 70. But we've one-hot encoded
+that as you can see here, with The tf.keras.utils
+dot to categorical. So by one-hot encoding that, when we look here we see there's a one hiding in here somewhere
+and it's right there. That's actually
+the 70th elements in the list. So our labeled for that word is a one-hot encoded to
+the say number 70. So when we see, when we train
+for sequence like this, we're saying this is what
+it's labeled will look like. So again, if I just print these out I get four, two, 66, eight, 67, 68 it should be followed by 70 but that's not
+one-hot encoded to this. If I look at my word index again, if we wanted to look
+through this and find those characters
+four, two, 66 etc. We would see them in here. So in the town of Athy one Jeremy Lanigan and
+that type of thing. So that's what my training
+data looks like. So now, I'm going to build a model to actually
+train it with that data. I'm just going to create
+a very simple one. It's in sequential am putting
+an embedding in there, am feeding the embedding the total number of words
+and am just going to just plot them in 64 dimensions. I'm going to create
+a very simple lstm, bidirectional LSTM
+with 20 LSTM units and then I'm going to add
+a dense layer between that and add at the end for the total number of words
+activate that by softmax. So, there are 263 total words in the corpus and we're
+going to train for those. So my label like he said, one-hot encoded
+looking like this. So that will be my last layer. I'm going to compile
+this it's categorical. So I'm going to use
+categorical cross entropy. I'm just going to use
+the basic atom as the optimizer. Because there's
+not a lot of data, I'm going to have to
+train it quite a lot of epochs and you'll see as I start training that my accuracy is very low to begin with, but it will improve over time. It's like epoch one ammonia 0.02 but I'm almost double to 0.05. Let's take some
+0.05 away await for a while but then
+continues to increase. There's not a lot of data here. It's only taking about one
+second as you can see for each epoch and it's increasing
+steadily epoch by epoch. It's 500 epochs so it's going
+to take a little while. So I'm just going to pause there. We can see now that we're
+reaching the end of it. We're in the 480 epochs that
+the accuracy is up into the 94,95 percent range so
+it's looking pretty good. We actually hit that much earlier as we'll see when we chart it, but we end up with
+94.7 percent accuracy. If I charted out and plot that, we'll see we kind of hit
+that at around 200 epochs. We probably didn't
+need to go all 500 but it's nice to see
+it training like that. So now let's take a look
+at predicting words using the model that
+we trained on this. So if I seeded with this text
+Lawrence went to Dublin, I am going to ask it
+for the next 100 words. What it's going to do, is for each of the next 100 words
+it's going to create a token lists using tokenizer text sequences
+of the seed text. Then that token list
+is going to get padded to the actual
+length that we want. Then that's going to be
+passed into the model. So we're going to
+predict the classes for the token list that was generated off of this seed text and then we'll get
+an output word from that. Then that will be
+used to feed into the next time round to predict again to get another model. So when we start with
+Lawrence went to Dublin, it'll get us another word and
+that phrase will generate another word and that phrase will generate another word etc. So if I print that out, we'll get something like this. Lawrence went to Dublin
+a twist of a reel and a jig, jig gathered gathered them
+long new weeks i spent up jig Dublin might ask ask ask
+mother asks jig man again. We can see what's actually
+happening here is that in the beginning it kind
+of looks pretty good. It's beginning to make sense. But of course because
+our body of texts is pretty small and each prediction
+is a probability. So after the words
+Lawrence went to Dublin, the most probable word
+that would come next is A, but of course it's not
+100 percent certainty. It's a probability and
+then the probability of the next probable word after Lawrence went to
+Dublin A would be twist and keep going twist
+over reel and a jig. But as you can see then, as you get further and
+further and further then the probabilities are decreasing and the quality of the prediction as
+a result goes down. So you end up with for example repeated words like
+Jake Jake, gathered gathered. It's kind of fun
+if we take a look at some of the words in the song, so we could see how they would
+deal with the prediction. So for example, when we say
+Lawrence went to Dublin, a twist of a reel. So let's take a look
+at a twist of a reel. If we go back to
+the original song and the text of the original song see if those words
+actually exist. For example, here
+I can see within the song itself it
+says i tipped them the twist of a reel and the jig was one of
+the lyrics of the song. If I go back to my prediction, it gave me, Lawrence went to Dublin a twist of
+a reel and a jig. So women saw the words twists. The next word was almost
+always going to be off when it seeds word of the next word is always
+going to be reel out a and then reel and
+then at the jigs. So we see that
+actually happening. Coming from these training words. So that's a very simple example. In the next lesson, you are going to be using
+a much bigger corpus of text and hopefully, the predictions will make a little bit more sense and
+be a little bit more poetic.
