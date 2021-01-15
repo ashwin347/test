@@ -1,0 +1,86 @@
+<html>
+    <style>
+        body {
+            background-color: #e1dce6;
+            
+          }
+        #box1{
+            background-color: rgb(248, 248, 248);
+            text-align: center;
+            
+            width: 500px;
+            position: relative;
+            left: 370px;
+            height: 100%;
+
+        }
+        #data{
+            position: relative;
+            top: 63px;
+        }
+        #username,#password{
+            height: 60px;
+            width: 443px;
+            border-radius: 20px;
+
+            
+        }
+        ::placeholder { 
+            text-align: center;
+            
+            opacity: 1; 
+          }
+          button{
+            height: 43px;
+            width: 443px;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+ 
+          }
+          #hed{
+              background-color: rgb(117, 14, 201);
+              height: 90px;
+              
+          }
+          h3{
+              font-family:Georgia, 'Times New Roman', Times, serif;
+              font-style: italic;
+              position: relative;
+              top: 27px;
+          }
+          
+    </style>
+    <body>
+        
+        <div id="box1">
+        <form action='login'><div id="hed"><h3>  LOGIN YOUR ACCOUNT </h3></div>
+            
+            <div id="data"><input name='username' id='username' type='text'placeholder='username' required><br><br><br>
+            <input name='password' id='password' type='password' placeholder='password' required><br><br><br>
+            <a href="forgot.html">Forgot Password</a><br><br>
+            <button type="submit" onclick="mydata()" name="login">LOGIN</button><br><br><br>
+            Create New Account<br><br>
+            <button onclick=send(); value='signup'>SIGN UP</button>
+        </div>
+        </form>
+         </div>
+        
+    </body>
+   
+    <script>
+        function send(){
+            
+            username=document.getElementById('username').value
+            password=document.getElementById('password').value
+            if(username=="" || password==""){
+                return 
+            }
+            window.location.href='/signup?username='+username+"&password="+password;
+        }
+        function mydata(){
+            alert("{{data}}")
+            
+        }
+    </script>
+</html>
