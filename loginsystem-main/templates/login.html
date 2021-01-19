@@ -52,10 +52,13 @@
           
     </style>
     <body>
-        
-        <div id="box1">
-        <form action='login'><div id="hed"><h3>  LOGIN YOUR ACCOUNT </h3></div>
+        <script>
             
+        </script>
+        <div id="box1">
+            
+        <form action='login'><div id="hed"><h3>  LOGIN YOUR ACCOUNT </h3></div>
+            <h1>{{data}}</h1>
             <div id="data"><input name='username' id='username' type='text'placeholder='username' required><br><br><br>
             <input name='password' id='password' type='password' placeholder='password' required><br><br><br>
             <a href="forgot.html">Forgot Password</a><br><br>
@@ -70,7 +73,7 @@
    
     <script>
         function send(){
-            
+            event.preventDefault();
             username=document.getElementById('username').value
             password=document.getElementById('password').value
             if(username=="" || password==""){
@@ -78,9 +81,6 @@
             }
             window.location.href='/signup?username='+username+"&password="+password;
         }
-        function mydata(){
-            alert("{{data}}")
-            
-        }
+        
     </script>
 </html>

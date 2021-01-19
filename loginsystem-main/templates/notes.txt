@@ -1,0 +1,31 @@
+welcome.html
+- 2 links admin, user
+when clicked admin go to admin login : username admin password admin
+if successfull goto admin home, display list of users
+
+when clicked on user link,
+- userlogin.html, 
+- register link
+	when clicked on registration link, go to user registration page
+	2 fields, name, phone or email, usrname or password
+	userdetails table insert values
+	testdb
+	userlogin user id and password checking 
+	if success userhome.html
+		in userhome, 2 links profile and logout
+		when clicked show profile
+		password field and fone and email editable
+		profile.html il, edit and button button
+		when logged out userlogin
+		userhome.html show top corner show user logged
+		profile.html
+
+1) welcome.html - admin, user link
+2) adminlogin - user name:admin pasword:admin 
+3) Admin home. display the list of users
+4) userlink -> userlogin.html
+5) userlogin.html - Register link
+6) register link - userregistration.html - name,phone, email, username and pasword - mysql (userdetails table- Testdb) -
+7) userlogin - user and password - table combination check - userdetails - success userhome.html
+8) userhome - profile and logout
+9) profile - user details list. password field and phone email
