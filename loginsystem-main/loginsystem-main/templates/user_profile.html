@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <h1>Hello, {{user.name}}</h1>
+
+        <div>
+            <h5>Username : <label id="username">{{user.name}}</label>
+                <button onclick='edit()' id="edit_username">Edit</button>
+                <button onclick='update("username")' id="update_username">update</button>
+            </h5>
+        </div>
+        <script>
+            function edit(){
+                document.getElementById('edit_username').style.display="None"
+                element=document.getElementById('username')
+                input=document.createElement('input')
+                input.value='{{user.name}}'
+                element.innerHTML=""
+                element.appendChild(input)
+            }
+            function update(field){
+                new_value=input.value
+                //window.location.href='update_profile?type='+field+'&newdata='+new_value+'&email='+user.email;
+                
+            }
+        </script>
+    </body>
+</html>

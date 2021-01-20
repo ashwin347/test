@@ -3,12 +3,12 @@
         
     <div id="box1">
         <h1>{{data}}</h1>
-    <form action='adm_login' method="POST"><div id="hed"><h3>  LOGIN YOUR ACCOUNT </h3></div>
+    <form action='adm_login' method="GET"><div id="hed"><h3>  LOGIN YOUR ACCOUNT </h3></div>
         
         <div id="data"><input name='username' id='username' type='text'placeholder='username' required><br><br><br>
         <input name='password' id='password' type='password' placeholder='password' required><br><br><br>
         <a href="forgot.html">Forgot Password!!!</a><br><br>
-        <button type="submit" onsubmit="adm_check()" name="login">LOGIN</button><br><br><br>
+        <button type="submit"  name="login">LOGIN</button><br><br><br>
         
     </div>
     </form>
@@ -16,13 +16,5 @@
     
 </body>
 <script>
-    function adm_check(){
-        username=document.getElementById('username').value
-        password=document.getElementById('password').value
-        if(username=="" || password==""){
-            return
-        }
-        window.location.href='/adm_login?username='+username+"&password="+password;
-        
-    }
+    
 </script>

@@ -14,22 +14,27 @@ def user(request):
 def adm_login(request):
     username=request.GET['username']
     passw=request.GET['password']
-    if username!='admin' and passw!='123':
-        return render(request,{"data":'username or password incorrect'})
+    if username!='admin' or passw!='admin':
+        return render(request,'admin.html',{"data":'username or password incorrect'})
     else:
-        return render(request,'adminhome.html',{"data":'login successfull'})
+        users=userdata.objects.all()
+        return render(request,'adminhome.html',{"data":'login successfull',"users":users})
 
-
-
+def update_profile(request):
+    field=request.GET['type']
+    newdata=request.GET['newdata']
+    email=request.GET['email']
+    
 def validate(request):
     username=request.GET['username']
     passw=request.GET['password']
     user=userdata.objects.filter(name=username,password=passw)
     if len(user)==0:
-    #if username=='ashwin' and passw=='babu':
         return render(request,'user.html',{"data":'username or password incorrect'})
     else:
-        return render(request,'user.html',{"data":'login successfull'})
+        return render(request,'user_profile.html',{"user":user[0]})
+def update_profile(request):
+    email=request.GET['email']
 def signup(request):
     username=request.GET['username']
     passw=request.GET['password']
